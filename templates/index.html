@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Warna Resistor</title>
+  <script>
+    async function hitung() {
+      const gelang1 = document.getElementById("gelang1").value;
+      const gelang2 = document.getElementById("gelang2").value;
+      const pengali = document.getElementById("pengali").value;
+      const toleransi = document.getElementById("toleransi").value;
+
+      const respon = await fetch("/hitung", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gelang1, gelang2, pengali, toleransi })
+      });
+
+      const hasil = await respon.json();
+      document.getElementById("hasil").innerText =
+  `Resistansi: ${hasil.resistansi} (${hasil.toleransi})\n${hasil.warna}`;
+}
+  </script>
+</head>
+<body style="font-family:sans-serif; text-align:center;">
+  <h1>Kalkulator Warna Resistor (4 Gelang)</h1>
+
+  <label for="gelang1">Gelang Pertama:</label>
+  <select id="gelang1">
+    <option value="hitam">Hitam</option><option value="coklat">Coklat</option><option value="merah">Merah</option>
+    <option value="oranye">Oranye</option><option value="kuning">Kuning</option><option value="hijau">Hijau</option>
+    <option value="biru">Biru</option><option value="ungu">Ungu</option><option value="abu-abu">Abu-abu</option>
+    <option value="putih">Putih</option>
+  </select>
+  <br><br>
+
+  <label for="gelang2">Gelang Kedua:</label>
+  <select id="gelang2">
+    <option value="hitam">Hitam</option><option value="coklat">Coklat</option><option value="merah">Merah</option>
+    <option value="oranye">Oranye</option><option value="kuning">Kuning</option><option value="hijau">Hijau</option>
+    <option value="biru">Biru</option><option value="ungu">Ungu</option><option value="abu-abu">Abu-abu</option>
+    <option value="putih">Putih</option>
+  </select>
+  <br><br>
+
+  <label for="pengali">Gelang Ketiga (Pengali):</label>
+<select id="pengali">
+  <option value="hitam">Hitam</option>
+  <option value="coklat">Coklat</option>
+  <option value="merah">Merah</option>
+  <option value="oranye">Oranye</option>
+  <option value="kuning">Kuning</option>
+  <option value="hijau">Hijau</option>
+  <option value="biru">Biru</option>
+  <option value="ungu">Ungu</option>
+  <option value="abu-abu">Abu-abu</option>
+  <option value="putih">Putih</option>
+  <option value="emas">Emas</option>
+  <option value="perak">Perak</option>
+</select>
+<br><br>
+
+  <label for="toleransi">Gelang Keempat (Toleransi):</label>
+<select id="toleransi">
+  <option value="coklat">Coklat</option>
+  <option value="merah">Merah</option>
+  <option value="hijau">Hijau</option>
+  <option value="biru">Biru</option>
+  <option value="ungu">Ungu</option>
+  <option value="abu-abu">Abu-abu</option>
+  <option value="emas">Emas</option>
+  <option value="perak">Perak</option>
+  <option value="tidak ada">Tidak Ada</option>
+</select>
+
+  <br><br>
+
+  <button onclick="hitung()">Hitung</button>
+
+  <h2 id="hasil"></h2>
+</body>
+</html>
